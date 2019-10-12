@@ -8,11 +8,13 @@
 
 import Cocoa
 import SwiftUI
+import OAuth2
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
+    var oauth: OAuth2CodeGrant?
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -39,8 +41,65 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Dicking around with Spotify
     func loginToSpotify() {
-        print("Logging in to Spotify!")
+        let authorizeUri = "https://accounts.spotify.com/authorize"
+        let tokenUri = "https://accounts.spotify.com/api/token"
+        
+        self.oauth = OAuth2CodeGrant(settings: [
+            "authorize_uri": authorizeUri,
+            "token_uri": tokenUri,
+            "client_id": "ab9cca6db343470e91de316d72223a8f",
+            "client_secret": "6b6e3a1db27944009f707a4877cfd29d",
+            "response_type": "code",
+            "redirect_uris": ["boombox://oauth/callback"],
+            "scope": "user-library-read",
+            "parameters": [
+                "method": "get"
+            ]
+        ] as OAuth2JSON)
+        
+//        oauth!.logger = OAuth2DebugLogger(.trace)
+        
+        oauth!.authorize { (json, error) in
+            print("finished authorizing!")
+            print("json: \(json)")
+            print("error: \(error)")
+        }
     }
+    
+    // MARK: - Handle custom scheme
+    
+    func application(_ application: NSApplication, open urls: [URL]) {
+        guard let oauth = self.oauth else { return }
+        
+        let url = urls[0]
+        oauth.handleRedirectURL(url)
+    }
+    
+//    func application(_ application: NSApplication,
+//                     open url: URL,
+//                     options: [NSApplicationOpenURLOptionsKey : Any] = [:] ) -> Bool {
+//
+//        // Determine who sent the URL.
+//        let sendingAppID = options[.sourceApplication]
+//        print("source application = \(sendingAppID ?? "Unknown")")
+//
+//        // Process the URL.
+//        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+//            let albumPath = components.path,
+//            let params = components.queryItems else {
+//                print("Invalid URL or album path missing")
+//                return false
+//        }
+//
+//        if let photoIndex = params.first(where: { $0.name == "index" })?.value {
+//            print("albumPath = \(albumPath)")
+//            print("photoIndex = \(photoIndex)")
+//            return true
+//        } else {
+//            print("Photo index missing")
+//            return false
+//        }
+//    }
 
     // MARK: - Core Data stack
 

@@ -13,6 +13,7 @@
 		99917BF32351B64100E0DA15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99917BF22351B64100E0DA15 /* Assets.xcassets */; };
 		99917BF62351B64100E0DA15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99917BF52351B64100E0DA15 /* Preview Assets.xcassets */; };
 		99917BF92351B64100E0DA15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99917BF72351B64100E0DA15 /* Main.storyboard */; };
+		99917C042351EC1600E0DA15 /* OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99917C012351EB3E00E0DA15 /* OAuth2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		99917BF82351B64100E0DA15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99917BFA2351B64100E0DA15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99917BFB2351B64100E0DA15 /* Boombox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Boombox.entitlements; sourceTree = "<group>"; };
+		99917C012351EB3E00E0DA15 /* OAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth2.framework; path = Carthage/Build/Mac/OAuth2.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99917C042351EC1600E0DA15 /* OAuth2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +60,7 @@
 		99917BEA2351B63E00E0DA15 /* Boombox */ = {
 			isa = PBXGroup;
 			children = (
+				99917C012351EB3E00E0DA15 /* OAuth2.framework */,
 				99917BEB2351B63E00E0DA15 /* AppDelegate.swift */,
 				99917BED2351B63E00E0DA15 /* ContentView.swift */,
 				99917BF22351B64100E0DA15 /* Assets.xcassets */,
@@ -87,6 +91,7 @@
 				99917BE42351B63E00E0DA15 /* Sources */,
 				99917BE52351B63E00E0DA15 /* Frameworks */,
 				99917BE62351B63E00E0DA15 /* Resources */,
+				99917C032351EB5F00E0DA15 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -142,6 +147,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		99917C032351EB5F00E0DA15 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/OAuth2.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OAuth2.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		99917BE42351B63E00E0DA15 /* Sources */ = {
@@ -290,6 +317,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Boombox/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = Boombox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -311,6 +342,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Boombox/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = Boombox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
