@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		993492532358F21A00B68F1E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 993492522358F21A00B68F1E /* Alamofire.framework */; };
+		993492552358F46D00B68F1E /* NetworkingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993492542358F46D00B68F1E /* NetworkingSupport.swift */; };
+		993492572358F54800B68F1E /* SongsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993492562358F54800B68F1E /* SongsTable.swift */; };
+		9934925A2358F5A100B68F1E /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993492592358F5A100B68F1E /* Track.swift */; };
+		99652CD4235B89300088A4D5 /* TickersWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99652CD3235B89300088A4D5 /* TickersWindow.swift */; };
+		99652CD6235B8E240088A4D5 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99652CD5235B8E240088A4D5 /* Ticker.swift */; };
+		99652CDB235C2C020088A4D5 /* TickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99652CDA235C2C020088A4D5 /* TickersView.swift */; };
+		99652CDD235C3B390088A4D5 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99652CDC235C3B390088A4D5 /* Border.swift */; };
 		99917BEC2351B63E00E0DA15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99917BEB2351B63E00E0DA15 /* AppDelegate.swift */; };
 		99917BEE2351B63E00E0DA15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99917BED2351B63E00E0DA15 /* ContentView.swift */; };
 		99917BF12351B63E00E0DA15 /* Boombox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 99917BEF2351B63E00E0DA15 /* Boombox.xcdatamodeld */; };
@@ -17,6 +25,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		993492522358F21A00B68F1E /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = SOURCE_ROOT; };
+		993492542358F46D00B68F1E /* NetworkingSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingSupport.swift; sourceTree = "<group>"; };
+		993492562358F54800B68F1E /* SongsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTable.swift; sourceTree = "<group>"; };
+		993492592358F5A100B68F1E /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		99652CD3235B89300088A4D5 /* TickersWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersWindow.swift; sourceTree = "<group>"; };
+		99652CD5235B8E240088A4D5 /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
+		99652CDA235C2C020088A4D5 /* TickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersView.swift; sourceTree = "<group>"; };
+		99652CDC235C3B390088A4D5 /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		99917BE82351B63E00E0DA15 /* Boombox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boombox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99917BEB2351B63E00E0DA15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99917BED2351B63E00E0DA15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,12 +51,49 @@
 			buildActionMask = 2147483647;
 			files = (
 				99917C042351EC1600E0DA15 /* OAuth2.framework in Frameworks */,
+				993492532358F21A00B68F1E /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		993492582358F57C00B68F1E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				993492592358F5A100B68F1E /* Track.swift */,
+				99652CD5235B8E240088A4D5 /* Ticker.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		99652CD7235C2BC80088A4D5 /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				99917BED2351B63E00E0DA15 /* ContentView.swift */,
+				993492562358F54800B68F1E /* SongsTable.swift */,
+			);
+			path = Tracks;
+			sourceTree = "<group>";
+		};
+		99652CD8235C2BD80088A4D5 /* Tickers */ = {
+			isa = PBXGroup;
+			children = (
+				99652CD3235B89300088A4D5 /* TickersWindow.swift */,
+				99652CDA235C2C020088A4D5 /* TickersView.swift */,
+				99652CDC235C3B390088A4D5 /* Border.swift */,
+			);
+			path = Tickers;
+			sourceTree = "<group>";
+		};
+		99652CD9235C2BE10088A4D5 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				993492542358F46D00B68F1E /* NetworkingSupport.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		99917BDF2351B63E00E0DA15 = {
 			isa = PBXGroup;
 			children = (
@@ -60,9 +113,13 @@
 		99917BEA2351B63E00E0DA15 /* Boombox */ = {
 			isa = PBXGroup;
 			children = (
+				993492522358F21A00B68F1E /* Alamofire.framework */,
 				99917C012351EB3E00E0DA15 /* OAuth2.framework */,
 				99917BEB2351B63E00E0DA15 /* AppDelegate.swift */,
-				99917BED2351B63E00E0DA15 /* ContentView.swift */,
+				99652CD8235C2BD80088A4D5 /* Tickers */,
+				99652CD7235C2BC80088A4D5 /* Tracks */,
+				993492582358F57C00B68F1E /* Models */,
+				99652CD9235C2BE10088A4D5 /* Support */,
 				99917BF22351B64100E0DA15 /* Assets.xcassets */,
 				99917BF72351B64100E0DA15 /* Main.storyboard */,
 				99917BFA2351B64100E0DA15 /* Info.plist */,
@@ -158,11 +215,15 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/OAuth2.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/SwiftyJSON.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OAuth2.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -176,8 +237,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				99917BEE2351B63E00E0DA15 /* ContentView.swift in Sources */,
+				99652CDD235C3B390088A4D5 /* Border.swift in Sources */,
+				99652CD6235B8E240088A4D5 /* Ticker.swift in Sources */,
 				99917BEC2351B63E00E0DA15 /* AppDelegate.swift in Sources */,
 				99917BF12351B63E00E0DA15 /* Boombox.xcdatamodeld in Sources */,
+				993492572358F54800B68F1E /* SongsTable.swift in Sources */,
+				99652CDB235C2C020088A4D5 /* TickersView.swift in Sources */,
+				99652CD4235B89300088A4D5 /* TickersWindow.swift in Sources */,
+				993492552358F46D00B68F1E /* NetworkingSupport.swift in Sources */,
+				9934925A2358F5A100B68F1E /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

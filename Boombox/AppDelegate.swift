@@ -9,38 +9,20 @@
 import Cocoa
 import SwiftUI
 import OAuth2
+import Alamofire
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var window: NSWindow!
-    var oauth: OAuth2CodeGrant?
-
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
-        // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = ContentView().environment(\.managedObjectContext, persistentContainer.viewContext)
-
-        // Create the window and set the content view. 
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-            backing: .buffered, defer: false)
-        window.center()
-        window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
-        window.makeKeyAndOrderFront(nil)
-        
-        self.loginToSpotify()
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
+    var mainWindow: NSWindow!
+    var tickersWindow: TickersWindow!
     
-    // MARK: - Dicking around with Spotify
-    func loginToSpotify() {
+    var oauth: OAuth2CodeGrant
+    var alamofire: SessionManager
+
+    static var instance: AppDelegate!
+    
+    override init() {
         let authorizeUri = "https://accounts.spotify.com/authorize"
         let tokenUri = "https://accounts.spotify.com/api/token"
         
@@ -57,22 +39,61 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             ]
         ] as OAuth2JSON)
         
-//        oauth!.logger = OAuth2DebugLogger(.trace)
+        let sessionManager = SessionManager()
+        let retrier = OAuth2RetryHandler(oauth2: self.oauth)
+        sessionManager.adapter = retrier
+        sessionManager.retrier = retrier
+        self.alamofire = sessionManager
         
-        oauth!.authorize { (json, error) in
-            print("finished authorizing!")
-            print("json: \(json)")
-            print("error: \(error)")
-        }
+        super.init()
+    }
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        AppDelegate.instance = self
+        
+        let contentView = ContentView()
+            .environment(\.managedObjectContext, persistentContainer.viewContext)
+            .environmentObject(TracksManager())
+
+        // Create the window and set the content view. 
+        mainWindow = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
+            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            backing: .buffered, defer: false)
+        mainWindow.center()
+        mainWindow.setFrameAutosaveName("Main Window")
+        mainWindow.contentView = NSHostingView(rootView: contentView)
+        mainWindow.makeKeyAndOrderFront(nil)
+        
+        tickersWindow = TickersWindow()
+        tickersWindow.makeKeyAndOrderFront(nil)
+        
+        self.loginToSpotify()
+    
+    }
+
+    func applicationWillTerminate(_ aNotification: Notification) {
+        // Insert code here to tear down your application
+    }
+    
+    func applicationDidChangeScreenParameters(_ notification: Notification) {
+        tickersWindow.updateFrame()
+    }
+    
+    // MARK: - Dicking around with Spotify
+    func loginToSpotify() {
+//        oauth.authorize { (json, error) in
+//            print("finished authorizing!")
+//            print("json: \(json)")
+//            print("error: \(error)")
+//        }
     }
     
     // MARK: - Handle custom scheme
     
     func application(_ application: NSApplication, open urls: [URL]) {
-        guard let oauth = self.oauth else { return }
-        
         let url = urls[0]
-        oauth.handleRedirectURL(url)
+        self.oauth.handleRedirectURL(url)
     }
     
 //    func application(_ application: NSApplication,
